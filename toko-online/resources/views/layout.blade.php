@@ -53,21 +53,25 @@
 </head>
 <body>
 
-    <nav>
-        <a href="{{ route('products.index') }}">Beranda</a>
+    
+<nav style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+    <a href="{{ route('products.index') }}">Beranda</a>
 
-        @auth
-            <span>Halo, {{ Auth::user()->nama_lengkap }}</span>
+    @auth
+        <span>Halo, {{ Auth::user()->nama_lengkap }}</span>
 
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        @else
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Daftar</a>
-        @endauth
-    </nav>
+        <a href="{{ route('cart.index') }}">Keranjang</a>
+
+        <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @else
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Daftar</a>
+    @endauth
+</nav>
+
 
     @if(session('success'))
         <p class="pesan">{{ session('success') }}</p>

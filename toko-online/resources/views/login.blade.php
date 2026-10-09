@@ -1,34 +1,29 @@
 @extends('layout')
 
-@section('title', 'Login')
-
 @section('content')
-    <div class="card">
-        <h1>Login</h1>
+    <h2>Login</h2>
 
-        <form action="{{ route('login.store') }}" method="POST">
-            @csrf
+    <form action="{{ route('login.store') }}" method="POST">
+        @csrf
 
-            <label>Username</label>
-            <input type="text" name="username"
-                   value="{{ old('username') }}" required>
+        <div style="margin-bottom: 15px;">
+            <label>Username</label><br>
+            <input type="text" name="username" value="{{ old('username') }}" required
+                style="width: 100%; padding: 10px; box-sizing: border-box;">
+        </div>
 
-            @error('username')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <div style="margin-bottom: 15px;">
+            <label>Password</label><br>
+            <input type="password" name="password" required
+                style="width: 100%; padding: 10px; box-sizing: border-box;">
+        </div>
 
-            <label>Password</label>
-            <input type="password" name="password" required>
+        @error('username')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
 
-            @error('password')
-                <p class="error">{{ $message }}</p>
-            @enderror
+        <button type="submit">Login</button>
+    </form>
 
-            <button type="submit">Login</button>
-        </form>
-
-        <p>Belum punya akun?
-            <a href="{{ route('register') }}">Daftar</a>
-        </p>
-    </div>
+    <p>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
 @endsection
