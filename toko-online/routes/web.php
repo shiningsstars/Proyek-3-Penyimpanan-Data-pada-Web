@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [ProductController::class, 'index'])
     ->name('products.index');
@@ -44,6 +45,18 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/checkout', [CheckoutController::class, 'store'])
         ->name('checkout.store');
+
+    Route::get('/riwayat-pesanan', [OrderController::class, 'index'])
+    ->name('orders.index');
+
+    Route::get('/riwayat-pesanan/{id_order}', [OrderController::class, 'show'])
+        ->name('orders.show');
+
+    Route::get('/riwayat-pesanan', [OrderController::class, 'index'])
+    ->name('orders.index');
+
+    Route::get('/riwayat-pesanan/{id_order}', [OrderController::class, 'show'])
+        ->name('orders.show');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])

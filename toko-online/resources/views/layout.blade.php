@@ -56,6 +56,7 @@
     
 <nav style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
     <a href="{{ route('products.index') }}">Beranda</a>
+    <a href="{{ route('orders.index') }}">Riwayat Pesanan</a>
 
     @auth
         <span>Halo, {{ Auth::user()->nama_lengkap }}</span>
