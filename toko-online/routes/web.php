@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StatelessCartController;
 
 Route::get('/', [ProductController::class, 'index'])
     ->name('products.index');
@@ -62,3 +64,24 @@ Route::middleware('auth')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::patch('/admin/users/{user}/role',
+    [RoleController::class, 'update'])
+    ->middleware(['auth', 'can:manage-roles'])
+    ->name('admin.users.role.update');
+
+Route::get('/admin/users', [RoleController::class, 'index'])
+    ->middleware(['auth', 'can:manage-roles'])
+    ->name('users.index');
+
+Route::get('/simulasi-cart', [StatelessCartController::class, 'index'])
+    ->middleware('auth')
+    ->name('stateless.cart.index');
+
+Route::post('/cart/add', [StatelessCartController::class, 'add'])
+    ->middleware(['auth', 'can:use-cart'])
+    ->name('stateless.cart.add');
+
+Route::post('/cart/update', [StatelessCartController::class, 'update'])
+    ->middleware(['auth', 'can:use-cart'])
+    ->name('stateless.cart.update');

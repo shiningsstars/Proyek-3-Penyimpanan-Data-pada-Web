@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class RoleDemoSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     public function run(): void
     {
@@ -20,7 +20,7 @@ class RoleDemoSeeder extends Seeder
             ['USRCUST000002', 'Customer Dua', 'customer2@toko.online', 'customer_dua', 'customer'],
         ];
 
-        foreach ($akun as [$id, $nama, $email, $username, $role]) {
+        foreach ($akun as [$id, $nama, $email, $username, $role, $alamat]) {
             $user = User::firstOrNew(['username' => $username]);
 
             $user->fill([
@@ -28,7 +28,7 @@ class RoleDemoSeeder extends Seeder
                 'nama_lengkap' => $nama,
                 'email' => $email,
                 'password' => 'password123',
-                'alamat' => 'Alamat dummy',
+                'alamat' => $alamat,
             ]);
 
             $user->role = $role;

@@ -57,6 +57,13 @@
 <nav style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
     <a href="{{ route('products.index') }}">Beranda</a>
     <a href="{{ route('orders.index') }}">Riwayat Pesanan</a>
+    @can('manage-roles')
+    <a href="{{ route('users.index') }}">Kelola Role</a>
+    @endcan
+
+    @auth
+        <a href="{{ route('stateless.cart.index') }}">Simulasi Cart</a>
+    @endauth
 
     @auth
         <span>Halo, {{ Auth::user()->nama_lengkap }}</span>
